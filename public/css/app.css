@@ -1,0 +1,30 @@
+h1 {
+    text-align: center;
+    padding: 25px;
+    font-size: 30px;
+    text-shadow: 1px 1px 0px rgb(41, 38, 34), 0 0 0.2em rgb(253, 253, 252), 0 0 0 rgb(90, 57, 19);
+}
+
+article{
+    margin-bottom: 100px;
+    padding-bottom: 100px;
+}
+
+a:hover{
+    color:chocolate;
+}
+
+
+.btn:hover{
+    background-color:yellow;
+    color:rgb(88, 45, 15)
+}
+
+.fondo{
+    backdrop-filter: blur(10px);
+    background: linear-gradient(70deg, rgb(156, 158, 158), rgb(185, 183, 184));
+}
+
+.barra{
+    backface-visibility: hidden;
+}
