@@ -1,0 +1,120 @@
+h1 {
+    text-align: center;
+    padding: 25px;
+    font-size: 30px;
+    text-shadow: 1px 1px 0px rgb(253, 248, 242), 0 0 0.2em rgb(25, 25, 23), 0 0 0 rgb(121, 77, 32);
+    color:rgb(242, 237, 233)
+}
+
+article{
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+}
+
+a:hover{
+    color:chocolate;
+}
+
+
+.btn:hover{
+    background-color:yellow;
+    color:rgb(88, 45, 15)
+}
+
+.fondo{
+    backdrop-filter: blur(10px);
+    background-image: url(../img/maderafondo.jpg);
+    background-size: cover;
+}
+
+.barra{
+    opacity: 0.9;
+    z-index: 990;
+    height: 75px;
+}
+
+.conlogos{
+    z-index: 999;
+}
+
+.listas{
+    background-image: url("../img/madera.jpg");
+    background-size: cover;
+    border: solid 0.1rem rgb(55, 45, 8) ;
+    border-radius: 20px;
+    height: calc(100% - 1.5rem) !important;
+
+}
+
+.barra{
+    background-image: url("../img/maderapruebabarra.jpg");
+    background-position: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body{
+    background-image: url("../img/fondobodi.jpg");
+    background-size: cover;
+}
+
+#map{
+    width: 36rem;
+    height: 36rem;
+}
+
+.cardabout{
+    background-image: url("../img/fondocontainer.jpg");
+}
+
+.mapalist{
+    border: solid 0.2rem rgb(55, 45, 8) ;
+}
+
+.mapacerveceria{
+    width: 250px;
+    height: 250px;
+}
+/* #tooltip {
+    display: inline-block;
+    background: #ffffff;
+    color: #643045;
+    font-weight: bold;
+    padding: 5px 10px;
+    font-size: 13px;
+    border-radius: 4px;
+    }
+
+    #arrow,
+    #arrow::before {
+        position: absolute;
+        width: 8px;
+        height: 8px;    
+        background: inherit;
+    }
+
+    #arrow {
+        visibility: hidden;
+    }
+
+    #arrow::before {
+        visibility: visible;
+        content: '';
+        transform: rotate(45deg);
+    }
+
+    #tooltip[data-popper-placement^='top'] > #arrow {
+        bottom: -4px;
+    }
+
+    #tooltip[data-popper-placement^='bottom'] > #arrow {
+        top: -4px;
+    }
+
+    #tooltip[data-popper-placement^='left'] > #arrow {
+        right: -4px;
+    }
+
+    #tooltip[data-popper-placement^='right'] > #arrow {
+        left: -4px;
+    } */

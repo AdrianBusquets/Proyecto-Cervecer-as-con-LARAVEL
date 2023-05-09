@@ -2,12 +2,13 @@ h1 {
     text-align: center;
     padding: 25px;
     font-size: 30px;
-    text-shadow: 1px 1px 0px rgb(41, 38, 34), 0 0 0.2em rgb(253, 253, 252), 0 0 0 rgb(90, 57, 19);
+    text-shadow: 1px 1px 0px rgb(253, 248, 242), 0 0 0.2em rgb(25, 25, 23), 0 0 0 rgb(121, 77, 32);
+    color:rgb(242, 237, 233)
 }
 
 article{
-    margin-bottom: 100px;
-    padding-bottom: 100px;
+    margin-bottom: 50px;
+    padding-bottom: 50px;
 }
 
 a:hover{
@@ -22,9 +23,45 @@ a:hover{
 
 .fondo{
     backdrop-filter: blur(10px);
-    background: linear-gradient(70deg, rgb(156, 158, 158), rgb(185, 183, 184));
+    background-image: url(../img/maderafondo.jpg);
+    background-size: cover;
 }
 
 .barra{
-    backface-visibility: hidden;
+    opacity: 0.9;
+    z-index: 990;
+    height: 75px;
+}
+
+.conlogos{
+    z-index: 999;
+}
+
+.listas{
+    background-image: url("../img/madera.jpg");
+    background-size: cover;
+    border: solid, black;
+    border-radius: 20px;
+
+}
+
+.barra{
+    background-image: url("../img/maderapruebabarra.jpg");
+    background-position: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body{
+    background-image: url("../img/fondobodi.jpg");
+    background-size: cover;
+}
+
+#map{
+    width: 36rem;
+    height: 36rem;
+}
+
+.cardabout{
+    background-image: url("../img/fondocontainer.jpg");
 }
