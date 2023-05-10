@@ -1,13 +1,10 @@
-@extends('layouts.app');
+@extends('layouts.app')
 @section('title','Contacta con nosotros')
-
 @section('content')
 <div class="d-flex justify-content-center">
     <div class="col-sm-6">
         <h1>Contacta con nosotros</h1>
-
         <x-msgflash />
-
         <form class="text-white" method="POST" action="{{ route('contact.store') }}"> 
             @csrf  
             <div class="mb-3">
