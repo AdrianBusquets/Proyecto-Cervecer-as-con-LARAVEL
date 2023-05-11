@@ -5,7 +5,7 @@
     <div class="col-sm-6">
         <h1>Contacta con nosotros</h1>
         <x-msgflash />
-        <form class="text-white" method="POST" action="{{ route('contact.store') }}"> 
+        <form class="text-white needs-validation" method="POST" action="{{ route('contact.store') }}" novalidate> 
             @csrf  
             <div class="mb-3">
                 <label for="exampleInputName1" class="form-label">Nombre</label>
@@ -53,7 +53,27 @@
         </form>   
     </div>
 </div>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+    'use strict'
 
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+        console.log('pasa por aqui');
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+        }, false)
+    })
+    })()
+    </script>
 
 
 

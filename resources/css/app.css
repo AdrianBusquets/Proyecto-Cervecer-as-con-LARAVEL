@@ -11,6 +11,9 @@ article{
     padding-bottom: 50px;
 }
 
+a{
+    color: aquamarine;
+}
 a:hover{
     color:chocolate;
 }
@@ -38,7 +41,7 @@ a:hover{
 }
 
 .listas{
-    background-image: url("../img/madera.jpg");
+    background-image: url("../img/fondolistas.jpg");
     background-size: cover;
     border: solid 0.1rem rgb(55, 45, 8) ;
     border-radius: 20px;
@@ -54,7 +57,7 @@ a:hover{
 }
 
 body{
-    background-image: url("../img/fondobodi.jpg");
+    background-image: url("../img/fondobody_.jpg");
     background-size: cover;
 }
 
@@ -75,6 +78,11 @@ body{
     width: 250px;
     height: 250px;
 }
+
+/* .fondocreate{
+    background-color: black;
+    opacity: 50%;
+} */
 /* #tooltip {
     display: inline-block;
     background: #ffffff;

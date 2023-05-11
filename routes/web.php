@@ -16,23 +16,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $breweries=[
-        ["id"=>1, "nombre"=>"Cervezas Uceda", "poblacion"=>"(Madrid)", "imagen"=> asset('img/cervezas_uceda.jpg')],
-        ["id"=>2, "nombre"=>"Dunne\´s Irish Pub", "poblacion"=>"(Barcelona)", "imagen"=> asset('img/dunne´s.jpg')],
-        ["id"=>3, "nombre"=>"Triana", "poblacion"=>"(Sevilla)", "imagen"=> asset('img/triana.jpg')],
-        ["id"=>4, "nombre"=>"Moraima", "poblacion"=>"(Madrid)", "imagen"=> asset('img/moraima.jpg')],
-        ["id"=>5, "nombre"=>"Yunque", "poblacion"=>"(Ponferrada)", "imagen"=> asset('img/Yunque.jpg')],
-        ["id"=>6, "nombre"=>"Pub The Irish Corner", "poblacion"=>"(Madrid)", "imagen"=> asset('img/pub_irish_corner.jpg')],
-    ];
-    return view('home', ["breweries"=> $breweries]) ."\n";
+    // $breweries=[
+    //     ["id"=>1, "nombre"=>"Cervezas Uceda", "poblacion"=>"(Madrid)", "imagen"=> asset('img/cervezas_uceda.jpg')],
+    //     ["id"=>2, "nombre"=>"Dunne\´s Irish Pub", "poblacion"=>"(Barcelona)", "imagen"=> asset('img/dunne´s.jpg')],
+    //     ["id"=>3, "nombre"=>"Triana", "poblacion"=>"(Sevilla)", "imagen"=> asset('img/triana.jpg')],
+    //     ["id"=>4, "nombre"=>"Moraima", "poblacion"=>"(Madrid)", "imagen"=> asset('img/moraima.jpg')],
+    //     ["id"=>5, "nombre"=>"Yunque", "poblacion"=>"(Ponferrada)", "imagen"=> asset('img/Yunque.jpg')],
+    //     ["id"=>6, "nombre"=>"Pub The Irish Corner", "poblacion"=>"(Madrid)", "imagen"=> asset('img/pub_irish_corner.jpg')],
+    // ];
+    return view('home') ."\n";
 })->name('home');
 
 
-Route::get('/cervecerias', [BreweryController::class,'list'])->name('breweries');
+Route::get('/cervecerias', [BreweryController::class,'index'])->name('breweries');
 
 
-Route::get('/cervecerias/{id}', [BreweryController::class, 'details'])->name('brewery');
 
+Route::get('/cervecerias/create', [BreweryController::class, 'create'])->name('breweries.create');
+Route::post('/cervecerias/store', [BreweryController::class, 'store'])->name('breweries.store');
+
+
+Route::get('/cervecerias/{id}', [BreweryController::class, 'show'])->name('brewery');
 
 Route::get ('/contact', [ContactController::class, 'create'])->name('contact.create');
 

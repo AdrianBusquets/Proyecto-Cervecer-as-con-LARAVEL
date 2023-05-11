@@ -7,7 +7,9 @@
 
 <div class= "col-sm-6">
     <div class="listas card mb-4 text-center w-100 text-white shadow-lg bg-body-dark rounded" style="border-radius:15px; width: 18rem;">
+        @isset($urlImg)
         <img src="{{ $urlImg }}" class="card-img-top" alt="...">
+        @endisset
         @isset($map)
         <div id="map" style= "widht:100% ; height:18rem ; border-radius:10px " class="card-img-top w-100"></div>
         @endisset
