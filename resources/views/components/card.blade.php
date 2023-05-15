@@ -28,6 +28,13 @@
             <a href="{{ $urlView }}" class="btn btn-secondary">Descubrela</a>
             @endisset
             
+            @isset($urlEdit)
+            <a href="{{ $urlEdit }}" class="btn btn-light">Modificar</a>
+            @endisset
+
+            @isset($urlDelete)
+            <a href="{{ $urlDelete }}" class="btn btn-danger">Eliminar</a>
+            @endisset
             
         </div>
         @if (isset($map) && isset($urlImg))

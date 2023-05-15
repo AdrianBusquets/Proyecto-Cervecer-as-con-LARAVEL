@@ -7,7 +7,8 @@
                 <x-card name="{!! $brewery->name !!}"
                         place="{!! $brewery->place !!}"
                         description="{!! $brewery->description !!}"
-                        {{-- urlView="{{ route('brewery', $brewery['id']) }}" --}}
+                        urlEdit="{{ route('breweries.edit', $brewery->id) }}"
+                        urlDelete="{{ route('breweries.edit', $brewery->id) }}"
                         urlBack="{{ route('breweries') }}"
                         map="S"
                         lat="{{ $brewery->latitude }}"

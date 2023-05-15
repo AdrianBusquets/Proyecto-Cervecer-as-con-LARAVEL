@@ -67,4 +67,34 @@ class BreweryController extends Controller
 
         return redirect()-> route('breweries')->with('message', 'Cervería agregada correctamente')->with('code', 0);
     }
+
+    public function edit($id){
+        $brewery = DB::table('breweries')->find($id);
+        return view('breweries.edit', compact('brewery'));
+    }
+
+    public function update(Request $request, $id){
+        // $id= $request->id;
+        $name= $request->name;
+        $place= $request->place;
+        $description=  $request->description;
+        $latitude= $request->latitude;
+        $longitude= $request->longitude;
+
+        try {
+            DB::table('breweries')->where('id', $id)->update([
+                'name'=> $name,
+                'place'=> $place,
+                'description'=> $description,
+                'latitude'=> $latitude,
+                'longitude'=> $longitude
+            ]);
+        } catch (RuntimeException $a) {
+            return back()->with('message', 'Los datos indicados no son correctos')->with('code', 200);
+        }
+
+        return redirect()-> route('breweries')->with('message', 'Cervería modificada correctamente')->with('code', 0);
+    }
+
+    
 }
