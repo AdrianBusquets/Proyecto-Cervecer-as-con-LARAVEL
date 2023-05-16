@@ -35,11 +35,13 @@ Route::get('/cervecerias', [BreweryController::class,'index'])->name('breweries'
 Route::get('/cervecerias/create', [BreweryController::class, 'create'])->name('breweries.create');
 Route::post('/cervecerias/store', [BreweryController::class, 'store'])->name('breweries.store');
 
-Route::get('/cervecerias/edit/{id}', [BreweryController::class, 'edit'])->name('breweries.edit');
-Route::post('/cervecerias/update', [BreweryController::class, 'update'])->name('breweries.update');
+Route::get('/cervecerias/edit/{brewery}', [BreweryController::class, 'edit'])->name('breweries.edit');
+Route::put('/cervecerias/update/{brewery}', [BreweryController::class, 'update'])->name('breweries.update');
+
+Route::delete('/cervecerias/delete/{brewery}', [BreweryController::class, 'delete'])->name('breweries.delete');
 
 
-Route::get('/cervecerias/{id}', [BreweryController::class, 'show'])->name('brewery');
+Route::get('/cervecerias/{brewery}', [BreweryController::class, 'show'])->name('breweries.show');
 
 Route::get ('/contact', [ContactController::class, 'create'])->name('contact.create');
 

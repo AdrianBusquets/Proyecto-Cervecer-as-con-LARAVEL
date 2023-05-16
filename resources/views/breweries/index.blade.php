@@ -17,19 +17,23 @@
             <x-msgflash />
         <div class="d-flex justify-content-center my-4">
             <a href="{{ route('breweries.create') }}" class="btn btn-secondary mb-4" style="width: 35%">Agrega una cervecería</a>
-        </div>
+        </div class="col-lg-4 col-md-6 col-sm-12">
             <div class="row d-flex justify-content-between">
                 
                 @foreach ($breweries as $brewery)
-                <x-card 
+                <x-card
+                        
                         name="{!! $brewery->name !!}"
+                        {{-- classCard= "{{ $classCard }}" --}}
                         place="{!! $brewery->place !!}"
-                        {{-- description="{!! $brewery->description !!}" --}}
-                        {{-- urlBack="{{ route('breweries') }}" --}}
-                        urlView="{{ route('brewery', $brewery->id) }}">
-                        @isset($brewery->imagen)
-                        <x-slot:urlImg>{{ $brewery->imagen }}</x-slot:urlImg>
-                        @endisset
+                        urlView="{{ route('breweries.show', $brewery->id) }}">
+                        <x-slot:urlImg>
+                            @if(isset($brewery->img) && ($brewery->img != ''))
+                            {{ $brewery->img }}
+                            @else
+                            {{ asset('../img/default.jpg') }}
+                            @endisset
+                        </x-slot:urlImg>
                 </x-card>
                 <script>
                     L.marker([{{ $brewery->latitude }}, {{ $brewery->longitude }}]).addTo(map);

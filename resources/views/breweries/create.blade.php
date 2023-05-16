@@ -5,10 +5,16 @@
     <div class="col-sm-6">
         <h1>Contacta con nosotros</h1>
         <x-msgflash />
+        @isset($errors)
+            @foreach ($errors->all() as $error)
+                <p class="bg-danger text-dark text-center">{{ $error }}</p>
+            @endforeach
+        @endisset
         {{-- <form class="text-white fondocreate needs-validation" method="POST" action="{{ route('breweries.store') }}" novalidate> 
             
         </form>   --}}
-        <form class="text-white needs-validation" method="POST" action="{{ route('breweries.store') }}" novalidate> 
+        <div class="opacidadCard">
+        <form class="text-white needs-validation" enctype="multipart/form-data" method="POST" action="{{ route('breweries.store') }}" novalidate> 
             @csrf  
             <div class="mb-3">
                 <label for="exampleInputName1" class="form-label">Nombre</label>
@@ -63,9 +69,15 @@
                 <div class="invalid-feedback">
                     Este campo es obligatorio
                 </div>
+                <div class="mb-3">
+                    <label for="img" class="form-label">Imagen</label>
+                    <input type="file" class="form-control" id="img"  name="img">
+                    <div id="longitudeHelp" class="form-text text-white">Sube una imagen</div>
+                </div>
             </div>
             <button type="submit" class="btn btn-secondary">Agregar</button>
         </form> 
+        </div>
     </div>
 </div>
 <script>

@@ -1,18 +1,19 @@
-{{-- @isset($classCard)
-<div class="{{ $classCard }}"></div>
+@isset($classCard)
+<div class="{{ $classCard }}">
 @else
-<div class= "col-lg-4 col-md-6">
-@endisset --}}
+<div class= "col-sm-12 col-md-6 col-lg-4">
+@endisset 
 
 
-<div class= "col-sm-6">
-    <div class="listas card mb-4 text-center w-100 text-white shadow-lg bg-body-dark rounded" style="border-radius:15px; width: 18rem;">
+
+    <div class="listas card mb-4 text-center text-white shadow-lg bg-body-dark rounded w-100" style="border-radius:15px;">
         @isset($urlImg)
-        <img src="{{ $urlImg }}" class="card-img-top" alt="...">
+        <img src="{{ $urlImg }}" class="card-img-top w-100" alt="...">
         @endisset
         @isset($map)
         <div id="map" style= "widht:100% ; height:18rem ; border-radius:10px " class="card-img-top w-100"></div>
         @endisset
+        
         <div class="card-body">
             <h5 class="card-title">{{ $name }}</h5>
             
@@ -27,19 +28,21 @@
             @isset($urlView)
             <a href="{{ $urlView }}" class="btn btn-secondary">Descubrela</a>
             @endisset
-            
+            <div class="d-flex justify-content-around">
             @isset($urlEdit)
             <a href="{{ $urlEdit }}" class="btn btn-light">Modificar</a>
             @endisset
 
             @isset($urlDelete)
-            <a href="{{ $urlDelete }}" class="btn btn-danger">Eliminar</a>
+            <form method="POST" action="{{ $urlDelete }}">
+                @method('DELETE')
+                @csrf
+            <button type="submit" href="{{ $urlDelete }}" class="btn btn-danger">Eliminar</button>
             @endisset
-            
+            </form>
+            </div>
         </div>
-        @if (isset($map) && isset($urlImg))
-        <div id="map" style= "widht:100% ; height:18rem" class="card-img-top w-100"></div>
-        @endif
+        
     </div>
     @isset($urlBack)
     <div class="text-center">

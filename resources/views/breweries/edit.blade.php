@@ -8,7 +8,8 @@
         {{-- <form class="text-white fondocreate needs-validation" method="POST" action="{{ route('breweries.store') }}" novalidate> 
             
         </form>   --}}
-        <form class="text-white needs-validation" method="POST" action="{{ route('breweries.update') }}" novalidate> 
+        <form class="text-white needs-validation" enctype="multipart/form-data" method="POST" action="{{ route('breweries.update', $brewery->id) }}" novalidate> 
+            @method('PUT')
             @csrf  
 
             <div class="mb-3">
@@ -64,6 +65,11 @@
                 <div class="invalid-feedback">
                     Este campo es obligatorio
                 </div>
+            </div>
+            <div class="mb-3">
+                <label for="img" class="form-label">Imagen</label>
+                <input type="file" class="form-control" id="img"  name="img">
+                <div id="longitudeHelp" class="form-text text-white">Sube una imagen</div>
             </div>
             <button type="submit" class="btn btn-secondary">Modificar</button>
         </form> 

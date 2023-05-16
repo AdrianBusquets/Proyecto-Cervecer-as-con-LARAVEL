@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BreweryRequest;
+use App\Models\Brewery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use RuntimeException;
 
 /**
@@ -16,51 +19,52 @@ class BreweryController extends Controller
      * Summary of breweries
      * @var array
      */
-    // public static $breweries=[
-    //     ["id"=>1, "nombre"=>"Cervezas Uceda", "poblacion"=>"(Madrid)", "imagen"=> 'img/cervezas_uceda.jpg', "latitud"=> 40.4203685, "longitud"=> -3.6166822,17],
-    //     ["id"=>2, "nombre"=>"Dunne's Irish Pub", "poblacion"=>"(Barcelona)", "imagen"=> 'img/dunnes.jpg', "latitud"=> 41.3836505, "longitud"=> 2.1762596,17],
-    //     ["id"=>3, "nombre"=>"Triana", "poblacion"=>"(Sevilla)", "imagen"=> 'img/triana.jpg', "latitud"=> 37.385091, "longitud"=> -6.0182199,16],
-    //     ["id"=>4, "nombre"=>"Moraima", "poblacion"=>"(Madrid)", "imagen"=> 'img/moraima.jpg', "latitud"=> 40.4104291, "longitud"=> -3.6596985,17],
-    //     ["id"=>5, "nombre"=>"Yunque", "poblacion"=>"(Ponferrada)", "imagen"=> 'img/Yunque.jpg', "latitud"=> 42.5569463, "longitud"=> -6.6122162,17],
-    //     ["id"=>6, "nombre"=>"Pub The Irish Corner", "poblacion"=>"(Madrid)", "imagen"=> 'img/pub_irish_corner.jpg', "latitud"=> 40.4386574, "longitud"=> -3.6406566,17],
-    // ];
     public function index(){
-        $breweries = DB::table('breweries')->get();
+        $breweries = Brewery::orderBy('name')->get();
         return view ('breweries.index', ['breweries' => $breweries]);
     }
 
-    public function show($id){
-        // $brewery = null;
-        // $i= 0;
-        // while (($i < count(self::$breweries) && ($brewery == null))){
-        //     if ($id == self::$breweries [$i]['id']){
-        //         $brewery = self::$breweries[$i];
-        //     }
-        //     $i++;
-        // }
-        $brewery = DB::table('breweries')->find($id);
+    // public function indexQB(){
+    //     $breweries = DB::table('breweries')->get();
+    //     return view ('breweries.index', ['breweries' => $breweries]);
+    // }
+
+    public function show(Brewery $brewery){
         return view ('breweries.show', compact('brewery'));
     }
+
+    // public function showQB($id){
+    //     $brewery = DB::table('breweries')->find($id);
+    //     return view ('breweries.show', compact('brewery'));
+    // }
 
     public function create(){
         return view('breweries.create');
     }
 
-    public function store(Request $request){
+    public function store(BreweryRequest $request){
         $name= $request->name;
         $description= $request->description;
         $place= $request->place;
         $latitude= $request->latitude;
         $longitude= $request->longitude;
 
+        $url="";
+        if($request->hasFile('img')){
+        $path= $request->file('img')->store('public/breweries');
+        $url = Storage::url($path);
+        }
+
         try {
-            DB::table('breweries')->insert([
+            $brewery = Brewery::create([
                 'name'=> $name,
                 'place'=> $place,
                 'description'=> $description,
                 'latitude'=> $latitude,
-                'longitude'=> $longitude
+                'longitude'=> $longitude,
+                'img'=> $url
             ]);
+            $brewery->saveOrFail();
         } catch (RuntimeException $a) {
             return back()-> route('breweries')->with('message', 'Los datos indicados no son correctos')->with('code', 200);
         }
@@ -68,12 +72,45 @@ class BreweryController extends Controller
         return redirect()-> route('breweries')->with('message', 'Cervería agregada correctamente')->with('code', 0);
     }
 
-    public function edit($id){
-        $brewery = DB::table('breweries')->find($id);
+    // public function storeQB(Request $request){
+    //     $name= $request->name;
+    //     $description= $request->description;
+    //     $place= $request->place;
+    //     $latitude= $request->latitude;
+    //     $longitude= $request->longitude;
+
+    //     $url="";
+    //     if($request->hasFile('img')){
+    //     $path= $request->file('img')->store('public/breweries');
+    //     $url = Storage::url($path);
+    //     }
+
+    //     try {
+    //         DB::table('breweries')->insert([
+    //             'name'=> $name,
+    //             'place'=> $place,
+    //             'description'=> $description,
+    //             'latitude'=> $latitude,
+    //             'longitude'=> $longitude,
+    //             'img'=> $url
+    //         ]);
+    //     } catch (RuntimeException $a) {
+    //         return back()-> route('breweries')->with('message', 'Los datos indicados no son correctos')->with('code', 200);
+    //     }
+
+    //     return redirect()-> route('breweries')->with('message', 'Cervería agregada correctamente')->with('code', 0);
+    // }
+
+    public function edit(Brewery $brewery){
         return view('breweries.edit', compact('brewery'));
     }
 
-    public function update(Request $request, $id){
+    // public function editQB($id){
+    //     $brewery = DB::table('breweries')->find($id);
+    //     return view('breweries.edit', compact('brewery'));
+    // }
+
+    public function update(BreweryRequest $request, Brewery $brewery){
         // $id= $request->id;
         $name= $request->name;
         $place= $request->place;
@@ -81,20 +118,79 @@ class BreweryController extends Controller
         $latitude= $request->latitude;
         $longitude= $request->longitude;
 
+        $url="";
+        if($request->hasFile('img')){
+        $path= $request->file('img')->store('public/breweries');
+        $url = Storage::url($path);
+        }
+
         try {
-            DB::table('breweries')->where('id', $id)->update([
-                'name'=> $name,
-                'place'=> $place,
-                'description'=> $description,
-                'latitude'=> $latitude,
-                'longitude'=> $longitude
-            ]);
+            $brewery->name= $name;
+            $brewery->place= $place;
+            $brewery->descrption= $description;
+            $brewery->latitude= $latitude;
+            $brewery->longitude= $longitude;
+            $brewery->img= $url;
+
+            $brewery->saveOrFail();
         } catch (RuntimeException $a) {
             return back()->with('message', 'Los datos indicados no son correctos')->with('code', 200);
         }
 
         return redirect()-> route('breweries')->with('message', 'Cervería modificada correctamente')->with('code', 0);
     }
+
+    // public function updateQB(Request $request, $id){
+    //     // $id= $request->id;
+    //     $name= $request->name;
+    //     $place= $request->place;
+    //     $description=  $request->description;
+    //     $latitude= $request->latitude;
+    //     $longitude= $request->longitude;
+
+    //     $campos= [
+    //         'name'=> $name,
+    //         'place'=> $place,
+    //         'description'=> $description,
+    //         'latitude'=> $latitude,
+    //         'longitude'=> $longitude
+    //     ];
+
+    //     $url="";
+    //     if($request->hasFile('img')){
+    //     $path= $request->file('img')->store('public/breweries');
+    //     $url = Storage::url($path);
+    //     $campos['img']= $url;
+    //     }
+
+    //     try {
+    //         DB::table('breweries')->where('id', $id)->update($campos);
+    //     } catch (RuntimeException $a) {
+    //         return back()->with('message', 'Los datos indicados no son correctos')->with('code', 200);
+    //     }
+
+    //     return redirect()-> route('breweries')->with('message', 'Cervería modificada correctamente')->with('code', 0);
+    // }
+
+    public function delete(Brewery $brewery){
+        try{
+            $brewery->deleteOrFail();
+        }catch (RuntimeException $a) {
+            return back()->with('message', 'No ha sido posible eliminar esta cervecería')->with('code', 200);
+        }
+
+        return redirect()-> route('breweries')->with('message', 'Cervería eliminada correctamente')->with('code', 0);
+    }
+
+    // public function deleteQB($id){
+    //     try{
+    //         DB::table('breweries')->delete($id);
+    //     }catch (RuntimeException $a) {
+    //         return back()->with('message', 'No ha sido posible eliminar esta cervecería')->with('code', 200);
+    //     }
+
+    //     return redirect()-> route('breweries')->with('message', 'Cervería eliminada correctamente')->with('code', 0);
+    // }
 
     
 }

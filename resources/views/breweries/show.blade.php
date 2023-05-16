@@ -8,14 +8,20 @@
                         place="{!! $brewery->place !!}"
                         description="{!! $brewery->description !!}"
                         urlEdit="{{ route('breweries.edit', $brewery->id) }}"
-                        urlDelete="{{ route('breweries.edit', $brewery->id) }}"
+                        urlDelete="{{ route('breweries.delete', $brewery->id) }}"
                         urlBack="{{ route('breweries') }}"
+                        classCard="col-sm-6 col-md-6 col-lg-6"
                         map="S"
                         lat="{{ $brewery->latitude }}"
                         long="{{ $brewery->longitude }}">
-                        @isset($brewery->imagen)
-                        <x-slot:urlImg>{{ $brewery->imagen }}</x-slot:urlImg>
+
+                        <x-slot:urlImg>
+                            @if(isset($brewery->img) && ($brewery->img != ''))
+                        {{ $brewery->img }}
+                        @else
+                        {{ asset('../img/default.jpg') }}
                         @endisset
+                        </x-slot:urlImg>
                 <x-slot:place>
                     <ul class="card-body">
                         <li class="list-group-item">An item</li>
