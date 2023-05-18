@@ -43,27 +43,35 @@ class BreweryController extends Controller
     }
 
     public function store(BreweryRequest $request){
-        $name= $request->name;
-        $description= $request->description;
-        $place= $request->place;
-        $latitude= $request->latitude;
-        $longitude= $request->longitude;
+        // $name= $request->name;
+        // $description= $request->description;
+        // $place= $request->place;
+        // $latitude= $request->latitude;
+        // $longitude= $request->longitude;
 
-        $url="";
-        if($request->hasFile('img')){
-        $path= $request->file('img')->store('public/breweries');
-        $url = Storage::url($path);
-        }
+        // $url="";
+        // if($request->hasFile('img')){
+        // $path= $request->file('img')->store('public/breweries');
+        // $url = Storage::url($path);
+        // }
+        $brewery= new Brewery();
+        $brewery->fill($request->validated());
+            if($request->hasFile('img')){
+            $brewery->img= Storage::url($request->file('img')->store('public/breweries'));
+            }
 
         try {
-            $brewery = Brewery::create([
-                'name'=> $name,
-                'place'=> $place,
-                'description'=> $description,
-                'latitude'=> $latitude,
-                'longitude'=> $longitude,
-                'img'=> $url
-            ]);
+            // $brewery = Brewery::create([
+            //     'name'=> $name,
+            //     'place'=> $place,
+            //     'description'=> $description,
+            //     'latitude'=> $latitude,
+            //     'longitude'=> $longitude,
+            //     'img'=> $url
+            // ]);
+            
+            
+            
             $brewery->saveOrFail();
         } catch (RuntimeException $a) {
             return back()-> route('breweries')->with('message', 'Los datos indicados no son correctos')->with('code', 200);
@@ -112,26 +120,30 @@ class BreweryController extends Controller
 
     public function update(BreweryRequest $request, Brewery $brewery){
         // $id= $request->id;
-        $name= $request->name;
-        $place= $request->place;
-        $description=  $request->description;
-        $latitude= $request->latitude;
-        $longitude= $request->longitude;
+        // $name= $request->name;
+        // $place= $request->place;
+        // $description=  $request->description;
+        // $latitude= $request->latitude;
+        // $longitude= $request->longitude;
 
-        $url="";
-        if($request->hasFile('img')){
-        $path= $request->file('img')->store('public/breweries');
-        $url = Storage::url($path);
-        }
+        // $url="";
+        // if($request->hasFile('img')){
+        // $path= $request->file('img')->store('public/breweries');
+        // $url = Storage::url($path);
+        // }
+
+        $brewery->fill($request->validated());
+            if($request->hasFile('img')){
+            $brewery->img= Storage::url($request->file('img')->store('public/breweries'));
+            }
 
         try {
-            $brewery->name= $name;
-            $brewery->place= $place;
-            $brewery->descrption= $description;
-            $brewery->latitude= $latitude;
-            $brewery->longitude= $longitude;
-            $brewery->img= $url;
-
+            // $brewery->name= $name;
+            // $brewery->place= $place;
+            // $brewery->descrption= $description;
+            // $brewery->latitude= $latitude;
+            // $brewery->longitude= $longitude;
+            
             $brewery->saveOrFail();
         } catch (RuntimeException $a) {
             return back()->with('message', 'Los datos indicados no son correctos')->with('code', 200);

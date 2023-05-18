@@ -3,7 +3,7 @@
 @section('content')
 <div class="d-flex justify-content-center">
     <div class="col-sm-6">
-        <h1>Contacta con nosotros</h1>
+        <h1>Agrega una cervecería</h1>
         <x-msgflash />
         @isset($errors)
             @foreach ($errors->all() as $error)
@@ -18,7 +18,7 @@
             @csrf  
             <div class="mb-3">
                 <label for="exampleInputName1" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp" required>
+                <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" aria-describedby="nameHelp" required>
                 <div id="nameHelp" class="form-text text-white">Dinos como se llama</div>
                 <div class="valid-feedback">
                     Nombre validado
@@ -29,7 +29,7 @@
             </div>
             <div class="mb-3">
                 <label for="exampleInputPlace1" class="form-label">Localidad</label>
-                <input type="text" class="form-control" id="exampleInputPlace1"  name="place"aria-describedby="placeHelp" required>
+                <input type="text" class="form-control" id="exampleInputPlace1"  name="place" value="{{ old('place') }}" aria-describedby="placeHelp" required>
                 <div id="placeHelp" class="form-text text-white">Localidad en la que se situa</div>
                 <div class="valid-feedback">
                     Localidad validada
@@ -40,7 +40,7 @@
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Descripción</label>
-                <textarea class="form-control" id="description" name="description" aria-describedby="descriptionHelp" required></textarea>
+                <textarea class="form-control" id="description" name="description" aria-describedby="descriptionHelp" required>{{ old('description') }}</textarea>
                 <div id="descriptionHelp" class="form-text text-white">Describenos el lugar</div><div class="valid-feedback">
                     Descripción validada
                 </div>
@@ -50,7 +50,7 @@
             </div>
             <div class="mb-3">
                 <label for="exampleInputLatitude1" class="form-label">Latitud</label>
-                <input type="number" step= "0.000001" class="form-control" id="exampleInputLatitude1"  name="latitude"aria-describedby="latitudeHelp" required>
+                <input type="number" step= "0.000001" class="form-control" id="exampleInputLatitude1"  name="latitude" value="{{ old('latitude') }}" aria-describedby="latitudeHelp" required>
                 <div id="latitudeHelp" class="form-text text-white">Su latitud</div>
                 <div class="valid-feedback">
                     Latitud validada
@@ -61,7 +61,7 @@
             </div>
             <div class="mb-3">
                 <label for="exampleInputlongitude1" class="form-label">Longitud</label>
-                <input type="number" step= "0.000001" class="form-control" id="exampleInputlongitude1"  name="longitude"aria-describedby="longitudeHelp" required>
+                <input type="number" step= "0.000001" class="form-control" id="exampleInputlongitude1"  name="longitude" value="{{ old('longitude') }}" aria-describedby="longitudeHelp" required>
                 <div id="longitudeHelp" class="form-text text-white">Su longitud</div>
                 <div class="valid-feedback">
                     Longitud validada

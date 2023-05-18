@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BreweryController;
 use App\Http\Controllers\ContactController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,19 +28,22 @@ Route::get('/', function () {
     return view('home') ."\n";
 })->name('home');
 
+Route::get('/home', function(){
+    return redirect()->route('home');
+});
+
 
 Route::get('/cervecerias', [BreweryController::class,'index'])->name('breweries');
 
-
-
-Route::get('/cervecerias/create', [BreweryController::class, 'create'])->name('breweries.create');
+Route::group(['middleware'=> 'auth'], function(){
+    Route::get('/cervecerias/create', [BreweryController::class, 'create'])->name('breweries.create');
 Route::post('/cervecerias/store', [BreweryController::class, 'store'])->name('breweries.store');
 
 Route::get('/cervecerias/edit/{brewery}', [BreweryController::class, 'edit'])->name('breweries.edit');
 Route::put('/cervecerias/update/{brewery}', [BreweryController::class, 'update'])->name('breweries.update');
 
 Route::delete('/cervecerias/delete/{brewery}', [BreweryController::class, 'delete'])->name('breweries.delete');
-
+});
 
 Route::get('/cervecerias/{brewery}', [BreweryController::class, 'show'])->name('breweries.show');
 
@@ -52,3 +56,7 @@ Route::get('/about', function () {
     return view ('about');
 })->name('about');
 
+
+Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -8,3 +8,9 @@ null !== ($code = Session::get('code') ))
 {{ $msg }}
 </div>
 @endif
+
+@if(isset($errors) && count($errors) >0)
+            @foreach ($errors->all() as $error)
+                <p class="bg-danger text-dark text-center">{{ $error }}</p>
+            @endforeach
+        @endisset

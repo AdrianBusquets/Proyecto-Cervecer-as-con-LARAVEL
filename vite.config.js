@@ -6,12 +6,9 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/sass/app.scss',
-                'resources/css/app.css',
                 'resources/js/app.js',
-                'resources/js/popperabout.js',
             ],
             refresh: true,
         }),
     ],
-
 });

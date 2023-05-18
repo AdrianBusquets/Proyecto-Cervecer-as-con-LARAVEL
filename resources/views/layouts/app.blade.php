@@ -37,13 +37,44 @@
                             <a class="nav-link text-white" href="{{ route('about') }}">¿Quienes somos?</a>
                         </li>
                     </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2"  type="search" placeholder="Cervecería" aria-label="Search">
-                        <button class="btn btn-dark" type="submit">¡Adelante!</button>
-                    </form>
+                    
+                </div>
+                {{-- <form class="d-flex" role="search">
+                    <input class="form-control me-2"  type="search" placeholder="Cervecería" aria-label="Search">
+                    <button class="btn btn-dark" type="submit">¡Adelante!</button>
+                </form> --}}
+                <div>
+                    @if (Route::has('logout'))
+                        <div>
+                            @if (Auth::check())
+                            <div class="nav-item">
+                                <a class="dropdown-item" href="javascript:document.getElementById('logout-form').submit();">
+                                    <button class="btn btn-dark m-4">Salir</button>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </div>
+                                @else
+                                <div class="nav-item d-flex justify-content-between m-4">
+                                    <a class="nav-link" href="{{ route('login') }}"><button class="btn btn-dark">Entra con tu cuenta</button></a>
+                                    <a class="nav-link" href="{{ route('register') }}"><button class="btn btn-light">Registrate</button></a>
+                                </div>
+                                
+                            @endif
+                        </div>
+
+                    @endif
                 </div>
             </div>
         </div>
+        
     </nav>
     <div class=" fondo container">
         {{-- //href="{{ $brewery['name'] }}" --}}

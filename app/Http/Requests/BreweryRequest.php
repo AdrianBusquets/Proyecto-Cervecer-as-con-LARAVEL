@@ -30,4 +30,23 @@ class BreweryRequest extends FormRequest
             'longitude'=> 'required'
         ];
     }
+
+    
+    public function messages()
+    {
+        return [
+            'name'=>[
+                'required'=> 'El nombre es obligatorio',
+                'min'=> 'El nombre debe tener al menos 2 caracteres',
+                'max'=> 'El nombre no debe sobre pasar los 30 caracteres'
+            ],
+            'description'=>[
+                'required'=> 'La descripción es obligatoria',
+                'min'=> 'La descripción debe tener al menos 25 caracteres'
+            ],
+            'place'=> 'La localidad es obligatoria',
+            'latitude'=> 'La latitud es obligatoria',
+            'longitude'=> 'La longitud es obligatoria'
+        ];
+    }
 }
