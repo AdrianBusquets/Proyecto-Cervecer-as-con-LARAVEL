@@ -7,8 +7,7 @@
                 <x-card name="{!! $brewery->name !!}"
                         place="{!! $brewery->place !!}"
                         description="{!! $brewery->description !!}"
-                        urlEdit="{{ route('breweries.edit', $brewery->id) }}"
-                        urlDelete="{{ route('breweries.delete', $brewery->id) }}"
+                        
                         urlBack="{{ route('breweries') }}"
                         classCard="col-sm-6 col-md-6 col-lg-6"
                         map="S"
@@ -22,6 +21,11 @@
                         {{ asset('../img/default.jpg') }}
                         @endisset
                         </x-slot:urlImg>
+                        @if ((null !== Auth::user()) && $brewery->author == Auth::user()->id)
+                        <x-slot:Edit>{{ route('breweries.edit', $brewery->id) }}</x-slot:Edit>
+                        <x-slot:Delete>{{ route('breweries.delete', $brewery->id) }}</x-slot:Delete>
+                        @endif
+                        
                 <x-slot:place>
                     <ul class="card-body">
                         <li class="list-group-item">An item</li>

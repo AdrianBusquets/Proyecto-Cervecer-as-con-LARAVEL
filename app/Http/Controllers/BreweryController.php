@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BreweryRequest;
 use App\Models\Brewery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use RuntimeException;
@@ -59,6 +60,7 @@ class BreweryController extends Controller
             if($request->hasFile('img')){
             $brewery->img= Storage::url($request->file('img')->store('public/breweries'));
             }
+        $brewery->author = Auth::id();
 
         try {
             // $brewery = Brewery::create([
@@ -69,9 +71,6 @@ class BreweryController extends Controller
             //     'longitude'=> $longitude,
             //     'img'=> $url
             // ]);
-            
-            
-            
             $brewery->saveOrFail();
         } catch (RuntimeException $a) {
             return back()-> route('breweries')->with('message', 'Los datos indicados no son correctos')->with('code', 200);

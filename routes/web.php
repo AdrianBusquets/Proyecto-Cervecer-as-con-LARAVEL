@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BeerController;
 use App\Http\Controllers\BreweryController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Auth;
@@ -46,6 +47,12 @@ Route::delete('/cervecerias/delete/{brewery}', [BreweryController::class, 'delet
 });
 
 Route::get('/cervecerias/{brewery}', [BreweryController::class, 'show'])->name('breweries.show');
+
+
+Route::resource('/beers', BeerController::class)->parameters('beers');
+
+Route::get('/cerveza/{name}', [BeerController::class, 'friendly']);
+
 
 Route::get ('/contact', [ContactController::class, 'create'])->name('contact.create');
 

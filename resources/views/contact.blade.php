@@ -5,7 +5,9 @@
     <div class="col-sm-6">
         <h1>Contacta con nosotros</h1>
         <x-msgflash />
-        <form class="text-white needs-validation" method="POST" action="{{ route('contact.store') }}" novalidate> 
+        <div id="contenedorform" style="position: relative">
+            <div id="fondoform" style="position: absolute; top:0px ; left: 0px; right: 0px; bottom: 0px; z-index: -1; opacity: 0.5;" class="rounded-5"></div>
+        <form class="text-white needs-validation text-center" method="POST" action="{{ route('contact.store') }}" novalidate> 
             @csrf  
             <div class="mb-3">
                 <label for="exampleInputName1" class="form-label">Nombre</label>
@@ -51,6 +53,7 @@
             </div>
             <button type="submit" class="btn btn-secondary">Enviar</button>
         </form>   
+        </div>
     </div>
 </div>
 <script>

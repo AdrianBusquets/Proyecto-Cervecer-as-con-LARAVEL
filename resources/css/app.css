@@ -11,6 +11,11 @@ h3, h4{
     color:rgb(248, 238, 229)
 }
 
+#fondoform{
+    background: radial-gradient(circle, rgb(57, 58, 58) 39%, rgb(1, 16, 19) 96%);
+    
+}
+
 article{
     margin-bottom: 50px;
     padding-bottom: 50px;
