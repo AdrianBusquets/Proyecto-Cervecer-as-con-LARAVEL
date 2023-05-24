@@ -21,11 +21,10 @@
                         {{ asset('../img/default.jpg') }}
                         @endisset
                         </x-slot:urlImg>
-                        @if ((null !== Auth::user()) && $brewery->author == Auth::user()->id)
-                        <x-slot:Edit>{{ route('breweries.edit', $brewery->id) }}</x-slot:Edit>
-                        <x-slot:Delete>{{ route('breweries.delete', $brewery->id) }}</x-slot:Delete>
+                        @if ((null !== Auth::user()) && ($brewery->author == Auth::user()->id))
+                        <x-slot:urlEdit>{{ route('breweries.edit', $brewery) }}</x-slot:urlEdit>
+                        <x-slot:urlDelete>{{ route('breweries.delete', $brewery) }}</x-slot:urlDelete>
                         @endif
-                        
                 <x-slot:place>
                     <ul class="card-body">
                         <li class="list-group-item">An item</li>
