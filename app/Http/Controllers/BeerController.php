@@ -73,8 +73,24 @@ class BeerController extends Controller
     public function friendly(string $name)
     {
         //
-        $beer= Beer::where('brand', $name)->get()->first();
-        return view('beers.show', compact('beer'));
+        $beers= Beer::where('brand', $name)->get();
+        if(! isset($beers) || (count($beers) == 0)){
+            return redirect()->route('beers.index')
+                        ->with('message', 'No hay ninguna cerveza con ese nombre')
+                        ->with('code', 500);
+        } else{
+            if(count($beers) == 1){
+                $beer= $beers->first();
+                return view('beers.show', compact('beer'));
+            } else{
+                return view('beers.index', compact('beer'))
+                        ->with('message', 'Hay más de una cerveza con el nombre indicado')
+                        ->with('code', 0);
+            }
+        }
+        
+        
+        
     }
 
     /**

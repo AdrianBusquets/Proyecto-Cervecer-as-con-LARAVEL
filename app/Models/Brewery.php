@@ -9,4 +9,8 @@ class Brewery extends Model
 {
     use HasFactory;
     public $fillable = ['name', 'place', 'description', 'latitude', 'longitude', 'img'];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
