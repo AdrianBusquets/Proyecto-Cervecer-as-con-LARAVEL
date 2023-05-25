@@ -17,8 +17,15 @@
         <div class="card-body">
             <h5 class="card-title">{{ $name }}</h5>
             
+            @isset($badges)
+                <p class="car-text">{{ $badges }}</p>
+            @endisset
             @isset($place)
             <p class="card-text">{{ $place }}</p>
+            @endisset
+
+            @isset($author)
+            <p class="card-text text-warning">Cervecería añadida por {{ $author }}</p>
             @endisset
 
             @isset($description)

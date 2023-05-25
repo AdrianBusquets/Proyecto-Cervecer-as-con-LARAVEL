@@ -46,6 +46,8 @@ Route::put('/cervecerias/update/{brewery}', [BreweryController::class, 'update']
 Route::delete('/cervecerias/delete/{brewery}', [BreweryController::class, 'delete'])->name('breweries.delete');
 });
 
+Route::get('/cervecerias/mispropuestas', [BreweryController::class, 'proposals'])->name('breweries.proposals');
+
 Route::get('/cervecerias/{brewery}', [BreweryController::class, 'show'])->name('breweries.show');
 
 

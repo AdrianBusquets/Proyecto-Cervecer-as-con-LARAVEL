@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BreweryRequest;
+use App\Models\Beer;
 use App\Models\Brewery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,11 @@ class BreweryController extends Controller
         return view ('breweries.index', ['breweries' => $breweries]);
     }
 
+    public function proposals(){
+        $breweries= Brewery::whereBelongsTo (Auth::user())->get();
+        return view ('breweries.index', ['breweries' => $breweries]);
+    }
+
     // public function indexQB(){
     //     $breweries = DB::table('breweries')->get();
     //     return view ('breweries.index', ['breweries' => $breweries]);
@@ -40,7 +46,8 @@ class BreweryController extends Controller
     // }
 
     public function create(){
-        return view('breweries.create');
+        $beers = Beer::orderBy('brand')->get();
+        return view('breweries.create', compact('beers'));
     }
 
     public function store(BreweryRequest $request){
@@ -60,20 +67,14 @@ class BreweryController extends Controller
             if($request->hasFile('img')){
             $brewery->img= Storage::url($request->file('img')->store('public/breweries'));
             }
-        $brewery->author = Auth::id();
+        $brewery->user_id = Auth::id();
 
         try {
-            // $brewery = Brewery::create([
-            //     'name'=> $name,
-            //     'place'=> $place,
-            //     'description'=> $description,
-            //     'latitude'=> $latitude,
-            //     'longitude'=> $longitude,
-            //     'img'=> $url
-            // ]);
             $brewery->saveOrFail();
+            $beers= $request->beers;
+            $brewery->beers()->attach($beers);
         } catch (RuntimeException $a) {
-            return back()-> route('breweries')->with('message', 'Los datos indicados no son correctos')->with('code', 200);
+            return back()->with('message', 'Los datos indicados no son correctos')->with('code', 200);
         }
 
         return redirect()-> route('breweries')->with('message', 'Cervería agregada correctamente')->with('code', 0);
@@ -109,7 +110,8 @@ class BreweryController extends Controller
     // }
 
     public function edit(Brewery $brewery){
-        return view('breweries.edit', compact('brewery'));
+        $beers = Beer::orderBy('brand')->get();
+        return view('breweries.edit', compact('brewery', 'beers'));
     }
 
     // public function editQB($id){
@@ -118,32 +120,16 @@ class BreweryController extends Controller
     // }
 
     public function update(BreweryRequest $request, Brewery $brewery){
-        // $id= $request->id;
-        // $name= $request->name;
-        // $place= $request->place;
-        // $description=  $request->description;
-        // $latitude= $request->latitude;
-        // $longitude= $request->longitude;
-
-        // $url="";
-        // if($request->hasFile('img')){
-        // $path= $request->file('img')->store('public/breweries');
-        // $url = Storage::url($path);
-        // }
-
         $brewery->fill($request->validated());
+        $brewery->user_id = Auth::id();
             if($request->hasFile('img')){
             $brewery->img= Storage::url($request->file('img')->store('public/breweries'));
             }
 
         try {
-            // $brewery->name= $name;
-            // $brewery->place= $place;
-            // $brewery->descrption= $description;
-            // $brewery->latitude= $latitude;
-            // $brewery->longitude= $longitude;
-            
             $brewery->saveOrFail();
+            $beers= $request->beers;
+            $brewery->beers()->sync($beers);
         } catch (RuntimeException $a) {
             return back()->with('message', 'Los datos indicados no son correctos')->with('code', 200);
         }
@@ -185,6 +171,7 @@ class BreweryController extends Controller
 
     public function delete(Brewery $brewery){
         try{
+            $brewery->beers()->detach();
             $brewery->deleteOrFail();
         }catch (RuntimeException $a) {
             return back()->with('message', 'No ha sido posible eliminar esta cervecería')->with('code', 200);

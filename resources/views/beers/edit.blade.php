@@ -44,6 +44,16 @@
                     Este campo es obligatorio
                 </div>
             </div>
+            <div class="mb-3 row m-2">
+                <label class="form-label">Cervecerías que la sirven sirve</label>
+                @foreach ($breweries as $brewery)
+                <div class="col-sm-6 form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="beer_{{ $brewery->id }}" value="{{ $brewery->id }}" name="breweries[]"
+                    {{ ($beer->breweries->find($brewery->id) ? "checked" : "") }}>
+                    <label class="form-check-label" for="brewery_{{ $brewery->id }}">{{ $brewery->name }}</label>
+                </div>
+                @endforeach
+            </div>
             <div class="mb-3">
                 <label for="img" class="form-label">Imagen</label>
                 <input type="file" class="form-control" id="img"  name="img">

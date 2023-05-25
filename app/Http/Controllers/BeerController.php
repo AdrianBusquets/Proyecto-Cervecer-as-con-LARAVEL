@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Beer;
+use App\Models\Brewery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +27,8 @@ class BeerController extends Controller
     {
         //
         if(Auth::check()){
-        return view('beers.create');
+            $breweries= Brewery::orderBy('name')->get();
+        return view('beers.create', compact('breweries'));
         } else {
             return redirect()
                     ->route('beers.index')
@@ -52,6 +54,8 @@ class BeerController extends Controller
             $beer->img= Storage::url ($request->file('img')->store('public/beers'));
         }
         $beer->saveOrFail();
+        $breweries= $request->breweries;
+        $beer->breweries()->attach($breweries);
         return redirect()->route('beers.index')->with('message', 'Cerveza creada correctamente')->with('code', 0);
             } else {
                 return redirect()
@@ -100,6 +104,7 @@ class BeerController extends Controller
     {
         //
         if(Auth::check()){
+            $breweries = Brewery::orderBy('name')->get();
             return view('beers.edit',compact('beer'));
             } else {
                 return redirect()
@@ -124,6 +129,8 @@ class BeerController extends Controller
             $beer->img= Storage::url($request->file('img')->store('public/beers'));
         }
         $beer->saveOrFail();
+        $breweries= $request->breweries;
+        $beer->breweries()->sync($breweries);
         return redirect()->route('beers.index')->with('message', 'Cerveza modificada correctamente')->with('code', 0);
             } else {
                 return redirect()
@@ -141,6 +148,7 @@ class BeerController extends Controller
     {
         //
         if(Auth::check()){
+            $beer->breweries()->detach();
             $beer->deleteOrFail();
             return redirect()->route('beers.index')->with('message', 'Cerveza eliminada correctamente')->with('code', 0);
             } else {

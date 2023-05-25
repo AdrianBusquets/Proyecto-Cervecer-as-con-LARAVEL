@@ -15,9 +15,10 @@
                 
             </script>
             <x-msgflash />
-        <div class="d-flex justify-content-center my-4">
+        <div class="d-flex justify-content-around my-4">
             @auth
             <a href="{{ route('breweries.create') }}" class="btn btn-secondary mb-4" style="width: 35%">Agrega una cervecería</a>
+            <a href="{{ route('breweries.proposals') }}" class="btn btn-light mb-4" style="width: 35%">Tus propuestas</a>
             @endauth
             @guest
                 <h4>Registrate para agregar una cervecería</h4>

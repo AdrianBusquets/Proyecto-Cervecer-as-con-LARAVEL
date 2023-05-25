@@ -12,16 +12,36 @@
                         classCard="col-sm-6 col-md-6 col-lg-6"
                         map="S"
                         lat="{{ $brewery->latitude }}"
-                        long="{{ $brewery->longitude }}">
+                        long="{{ $brewery->longitude }}"    
+                        >
+                        <x-slot:badges>
+                            @foreach ($brewery->beers as $beer)
+                            @if (($beer->id % 5) == 0)
+                                <a href="{{ route('beers.show', $beer) }}"><span class="badge rounded-pill text-warning bg-dark">{{ $beer->brand }}</span></a>
+                            @elseif (($beer->id % 5) == 1)
+                                <a href="{{ route('beers.show', $beer) }}"><span class="badge rounded-pill text-warning bg-secondary">{{ $beer->brand }}</span></a>
+                            @elseif (($beer->id % 5) == 2)
+                                <a href="{{ route('beers.show', $beer) }}"><span class="badge rounded-pill text-bg-light">{{ $beer->brand }}</span></a>
+                            @elseif (($beer->id % 5) == 3)
+                                <a href="{{ route('beers.show', $beer) }}"><span class="badge rounded-pill text-dark bg-warning">{{ $beer->brand }}</span></a>
+                            @else
+                                <a href="{{ route('beers.show', $beer) }}"><span class="badge rounded-pill text-dark bg-success">{{ $beer->brand }}</span></a>
+                            @endif
+                            @endforeach
+                        </x-slot:badges>
+                        @isset ($brewery->user)
+                        <x-slot:author>{{ $brewery->user->name }}</x-slot:author>
+                        @endisset
 
                         <x-slot:urlImg>
                             @if(isset($brewery->img) && ($brewery->img != ''))
                         {{ $brewery->img }}
-                        @else
+                            @else
                         {{ asset('../img/default.jpg') }}
-                        @endisset
+                            @endif
                         </x-slot:urlImg>
-                        @if ((null !== Auth::user()) && ($brewery->author == Auth::user()->id))
+                        @if (((! isset($brewery->user)) && (null !== Auth::user())) ||
+                        (null !== Auth::user()) && isset($brewery->user) && ($brewery->user->id == Auth::user()->id))
                         <x-slot:urlEdit>{{ route('breweries.edit', $brewery) }}</x-slot:urlEdit>
                         <x-slot:urlDelete>{{ route('breweries.delete', $brewery) }}</x-slot:urlDelete>
                         @endif
