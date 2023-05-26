@@ -18,4 +18,8 @@ class Brewery extends Model
     public function beers(){
         return $this->belongsToMany(Beer::class, 'beer_brewery');
     }
+
+    public function images(){
+        return $this->hasMany(Images::class);
+    }
 }

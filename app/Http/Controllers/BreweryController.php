@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BreweryRequest;
 use App\Models\Beer;
 use App\Models\Brewery;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -64,8 +65,15 @@ class BreweryController extends Controller
         // }
         $brewery= new Brewery();
         $brewery->fill($request->validated());
-            if($request->hasFile('img')){
-            $brewery->img= Storage::url($request->file('img')->store('public/breweries'));
+            if($request->hasFile('images')){
+                foreach($request->file('images') as $image){
+                    $image= Storage::url($request->file('images')->store('public/breweries'));
+                    $miImagen= new $image();
+                    $miImagen->img= $image;
+                    $miImagen->brewery_id= $brewery->id;
+
+                    $miImagen->saveOrFail();
+                }
             }
         $brewery->user_id = Auth::id();
 
