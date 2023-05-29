@@ -8,7 +8,38 @@
 
     <div class="listas card mb-4 text-center text-white shadow-lg bg-body-dark rounded w-100" style="border-radius:15px;">
         @isset($urlImg)
-        <img src="{{ $urlImg }}" class="card-img-top w-100" alt="...">
+            @isset($urlImgs)
+            @php
+                $urls= explode(",", $urlImgs);
+            @endphp
+            <div id="carouselExampleIndicators" class="carousel slide">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                    <img src="{{ $urlImg }}" class="d-block w-100" alt="{{ $name }}">
+                    </div>
+                    @foreach ($urls as $url)
+                    <div class="carousel-item">
+                        <img src="{{ $url }}" class="d-block w-100" alt="{{ $name }}">
+                        </div>
+                    @endforeach
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+                </div>
+            @else
+                <img src="{{ $urlImg }}" class="card-img-top w-100" alt="{{ $name }}">
+            @endisset
         @endisset
         @isset($map)
         <div id="map" style= "widht:100% ; height:18rem ; border-radius:10px " class="card-img-top w-100"></div>

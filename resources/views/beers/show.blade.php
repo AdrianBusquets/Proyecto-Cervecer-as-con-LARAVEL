@@ -42,6 +42,17 @@
                     {{ asset('../img/default.jpg') }}
                     @endif
                 </x-slot:urlImg>
+                @isset($brewery->images)
+                        <x-slot:urlImgs>
+                            @php
+                                $imagenes= [];
+                                foreach ($brewery->images as $image) {
+                                    $imagenes[]= $image->img;
+                                }
+                            @endphp
+                            {{ implode(",", $imagenes) }}
+                        </x-slot:urlImgs>
+                @endisset
         </x-card>
         </div>
     </div>

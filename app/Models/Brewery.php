@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Beer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,6 +19,6 @@ class Brewery extends Model
     }
 
     public function images(){
-        return $this->hasMany(Images::class);
+        return $this->hasMany(Image::class);
     }
 }

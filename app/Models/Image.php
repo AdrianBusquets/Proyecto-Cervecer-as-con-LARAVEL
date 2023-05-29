@@ -14,4 +14,8 @@ class Image extends Model
     public function brewery(){
         return $this->belongsTo(Brewery::class);
     }
+
+    public function beer(){
+        return $this->belongsTo(Beer::class);
+    }
 }

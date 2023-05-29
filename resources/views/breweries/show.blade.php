@@ -40,6 +40,17 @@
                         {{ asset('../img/default.jpg') }}
                             @endif
                         </x-slot:urlImg>
+                        @isset($brewery->images)
+                        <x-slot:urlImgs>
+                            @php
+                                $imagenes= [];
+                                foreach ($brewery->images as $image) {
+                                    $imagenes[]= $image->img;
+                                }
+                            @endphp
+                            {{ implode(",", $imagenes) }}
+                        </x-slot:urlImgs>
+                        @endisset
                         @if (((! isset($brewery->user)) && (null !== Auth::user())) ||
                         (null !== Auth::user()) && isset($brewery->user) && ($brewery->user->id == Auth::user()->id))
                         <x-slot:urlEdit>{{ route('breweries.edit', $brewery) }}</x-slot:urlEdit>

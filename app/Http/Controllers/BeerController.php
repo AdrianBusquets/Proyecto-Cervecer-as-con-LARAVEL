@@ -7,16 +7,40 @@ use App\Models\Brewery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Pagination\Paginator;
 class BeerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $beers= Beer::orderBy('brand')->get();
+        Paginator::useBootstrapFive();
+        $beers= Beer::orderBy('brand')->paginate(6);
+        if ($request->ajax()){
+            $ret= "";
+            if (count($beers) == 0){
+                $ret= '';
+            } else{
+            foreach ($beers as $beer){
+                $stars= view('components.stars', ['valor', $beer->vol, 'step'=> "1"])->render();
+                $atributes=[];
+                $atributes= [
+                    'name'=> $beer->brand,
+                    'description'=> $beer->description,
+                    'urlView'=> route('beers->show', $beer),
+                    'urlImg'=> ((isset($beer->img) && ($beer->img != '')) ? $beer->img : asset('../img/default.jpg')),
+                    'place'=> $stars,
+                ];
+                $ret .= view('components.card', $atributes)->render();
+            }
+            }
+            return response()->json(['beers'=> $ret]);
+        }
+
+        Paginator::useBootstrapFive();
+        $beers= Beer::orderBy('brand')->paginate(6);
         return view('beers.index', compact('beers'));
     }
 

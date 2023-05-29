@@ -13,7 +13,7 @@
     @endguest
 </div class="col-lg-4 col-md-6 col-sm-12">
     <div class="row d-flex justify-content-between">
-        
+        <div id="InfiniteScroll" class="row d-flex justify-content-between">
         @foreach ($beers as $beer)
         <x-card
                 
@@ -22,7 +22,15 @@
                 description="{!! $beer->description !!}"
                 urlView="{{ route('beers.show', $beer) }}">
                 <x-slot:place>
-                    <x-stars value="{{ $beer->vol }}" step="1" />
+                    <x-stars  step="1" value="10">
+                        {{-- <x-slot:value>
+                            @if(null !== $beer->vol && $beer->vol != "")
+                        {{ intval($beer->vol, 10) }}
+                        @else
+                        0
+                        @endif
+                        </x-slot:value> --}}
+                    </x-stars>
                 </x-slot:place>
                 
                 <x-slot:urlImg>
@@ -35,4 +43,55 @@
         </x-card>
         @endforeach
     </div>
+    </div>
+    <a href="javascript:window.loadData()">+</a>
+    <div class="d-flex justify-content-center">{{ $beers->links() }}</div>
+</div>
+<script>
+    window.page= 1;
+    window.contenedor= "InfiniteScroll";
+    window.finScroll = false;
+
+    window.loadData = ( () => {
+        if (window.finScroll == false){
+            window.finScroll = true;
+            window.page++;
+        urlInfiniteScroll= '?page' + window.page;
+        $.ajax(
+            {
+                url: urlInfiniteScroll,
+                type: 'get',
+                beforeSend: function(){
+                    console.log(urlInfiniteScroll);
+                }
+            }
+        )
+        .done (function (data) {
+            if(data.beers == ''){
+                console.log(data);
+                // window.finScroll = true;
+                $('#' + window.contenedor).append('<p class="text-warning">Has llegado al final del listado</p>');
+            } else{
+                $('#' + window.contenedor).append(data.beers);
+                window.finScroll = false;
+            }
+        })
+        .fail (function (jqXHR, ajaxOptions, thrownError){
+            console.log('Ha ocurrido un error');
+        })
+    }
+    });
+
+    
+
+    window.addEventListener ('scroll', function(){
+            if($(window).scrollTop + $(window).height >= $('#' + window.contenedor).scrollTop + $('#' + window.contenedor).height){
+                window.loadData();
+            }
+        });
+
+</script>
+
 @endsection
+
+

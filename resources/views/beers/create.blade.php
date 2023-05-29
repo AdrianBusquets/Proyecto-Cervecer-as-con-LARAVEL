@@ -57,11 +57,28 @@
                 <input type="file" class="form-control" id="img"  name="img">
                 <div id="longitudeHelp" class="form-text text-white">Sube una imagen</div>
             </div>
+            <div class="mb-3">
+                <label for="images" class="form-label">Más imágenes</label>
+                <div class="row" id="contImages">
+                    <div class="d-flex mb-2">
+                        <input type="file" class="form-control" id="images_0"  name="images[]">
+                        <a href="javascript: otraImg()" class="btn btn-warning" style="width: 20%">+</a>
+                    </div>
+                </div>
+                <div id="longitudeHelp" class="form-text text-white">Sube más imágenes</div>
+            </div>
             <button type="submit" class="btn btn-secondary">Añadir</button>
         </form> 
     </div>
 </div>
 <script>
+
+function otraImg(){
+        let contenedor= document.getElementById('contImages');
+        if(contenedor){
+            contenedor.insertAdjacentHTML('beforeEnd', '<div class="d-flex mb-2"> <input type="file" class="form-control" id="images_0"  name="images[]"><a href="javascript: otraImg()" class="btn btn-warning" style="width: 20%">+</a></div>');
+        }
+    }
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function() {
     'use strict'

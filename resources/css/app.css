@@ -36,7 +36,7 @@ a:hover{
 
 .fondo{
     backdrop-filter: blur(10px);
-    background-image: url(../img/maderafondo.jpg);
+    background: linear-gradient(black, transparent, black), url(../img/maderafondo.jpg);
     background-size: cover;
 }
 
