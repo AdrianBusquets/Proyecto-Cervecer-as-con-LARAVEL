@@ -144,23 +144,6 @@ class BreweryController extends Controller
 
         return redirect()-> route('breweries')->with('message', 'Cervería modificada correctamente')->with('code', 0);
     }
-
-    // public function updateQB(Request $request, $id){
-    //     // $id= $request->id;
-    //     $name= $request->name;
-    //     $place= $request->place;
-    //     $description=  $request->description;
-    //     $latitude= $request->latitude;
-    //     $longitude= $request->longitude;
-
-    //     $campos= [
-    //         'name'=> $name,
-    //         'place'=> $place,
-    //         'description'=> $description,
-    //         'latitude'=> $latitude,
-    //         'longitude'=> $longitude
-    //     ];
-
     //     $url="";
     //     if($request->hasFile('img')){
     //     $path= $request->file('img')->store('public/breweries');
@@ -187,16 +170,5 @@ class BreweryController extends Controller
 
         return redirect()-> route('breweries')->with('message', 'Cervería eliminada correctamente')->with('code', 0);
     }
-
-    // public function deleteQB($id){
-    //     try{
-    //         DB::table('breweries')->delete($id);
-    //     }catch (RuntimeException $a) {
-    //         return back()->with('message', 'No ha sido posible eliminar esta cervecería')->with('code', 200);
-    //     }
-
-    //     return redirect()-> route('breweries')->with('message', 'Cervería eliminada correctamente')->with('code', 0);
-    // }
-
     
 }

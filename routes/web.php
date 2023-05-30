@@ -3,6 +3,7 @@
 use App\Http\Controllers\BeerController;
 use App\Http\Controllers\BreweryController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,17 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    // $breweries=[
-    //     ["id"=>1, "nombre"=>"Cervezas Uceda", "poblacion"=>"(Madrid)", "imagen"=> asset('img/cervezas_uceda.jpg')],
-    //     ["id"=>2, "nombre"=>"Dunne\´s Irish Pub", "poblacion"=>"(Barcelona)", "imagen"=> asset('img/dunne´s.jpg')],
-    //     ["id"=>3, "nombre"=>"Triana", "poblacion"=>"(Sevilla)", "imagen"=> asset('img/triana.jpg')],
-    //     ["id"=>4, "nombre"=>"Moraima", "poblacion"=>"(Madrid)", "imagen"=> asset('img/moraima.jpg')],
-    //     ["id"=>5, "nombre"=>"Yunque", "poblacion"=>"(Ponferrada)", "imagen"=> asset('img/Yunque.jpg')],
-    //     ["id"=>6, "nombre"=>"Pub The Irish Corner", "poblacion"=>"(Madrid)", "imagen"=> asset('img/pub_irish_corner.jpg')],
-    // ];
-    return view('home') ."\n";
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/home', function(){
     return redirect()->route('home');

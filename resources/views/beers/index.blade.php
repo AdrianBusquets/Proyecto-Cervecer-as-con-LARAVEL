@@ -22,7 +22,7 @@
                 description="{!! $beer->description !!}"
                 urlView="{{ route('beers.show', $beer) }}">
                 <x-slot:place>
-                    <x-stars  step="1" value="10">
+                    <x-stars  step="1" value="{{ $beer->vol }}">
                         {{-- <x-slot:value>
                             @if(null !== $beer->vol && $beer->vol != "")
                         {{ intval($beer->vol, 10) }}
@@ -44,19 +44,24 @@
         @endforeach
     </div>
     </div>
-    <a href="javascript:window.loadData()">+</a>
-    <div class="d-flex justify-content-center">{{ $beers->links() }}</div>
+    <div id="loading" class="text-center d-none"><img src="{{ asset('img/loading.gif') }}"></div>
+    {{-- <a href="javascript:window.loadData()">+</a> --}}
+    {{-- <div class="d-flex justify-content-center">{{ $beers->links() }}</div> --}}
 </div>
 <script>
     window.page= 1;
     window.contenedor= "InfiniteScroll";
     window.finScroll = false;
+    window.divLoading= 'loading';
 
     window.loadData = ( () => {
         if (window.finScroll == false){
             window.finScroll = true;
+            $('#' + window.divLoading).removeClass('d-none');
+            
             window.page++;
-        urlInfiniteScroll= '?page' + window.page;
+        urlInfiniteScroll= '?page=' + window.page;
+        console.log(urlInfiniteScroll);
         $.ajax(
             {
                 url: urlInfiniteScroll,
@@ -68,16 +73,17 @@
         )
         .done (function (data) {
             if(data.beers == ''){
-                console.log(data);
-                // window.finScroll = true;
-                $('#' + window.contenedor).append('<p class="text-warning">Has llegado al final del listado</p>');
+                $('#' + window.contenedor).append('<p class="text-warning text-center">Has llegado al final del listado</p>');
             } else{
                 $('#' + window.contenedor).append(data.beers);
                 window.finScroll = false;
             }
+            $('#' + window.divLoading).addClass('d-none');
         })
+        
         .fail (function (jqXHR, ajaxOptions, thrownError){
-            console.log('Ha ocurrido un error');
+            $('#' + window.contenedor).append('<p class= "text-danger">Ha ocurrido un error</p>');
+            $('#' + window.divLoading).addClass('d-none');
         })
     }
     });

@@ -20,16 +20,14 @@ class BeerController extends Controller
         $beers= Beer::orderBy('brand')->paginate(6);
         if ($request->ajax()){
             $ret= "";
-            if (count($beers) == 0){
-                $ret= '';
-            } else{
+            if (count($beers) > 0){
             foreach ($beers as $beer){
-                $stars= view('components.stars', ['valor', $beer->vol, 'step'=> "1"])->render();
+                $stars= view('components.stars', ['value' => $beer->vol, 'step'=> "1"])->render();
                 $atributes=[];
                 $atributes= [
                     'name'=> $beer->brand,
                     'description'=> $beer->description,
-                    'urlView'=> route('beers->show', $beer),
+                    'urlView'=> route('beers.show', $beer),
                     'urlImg'=> ((isset($beer->img) && ($beer->img != '')) ? $beer->img : asset('../img/default.jpg')),
                     'place'=> $stars,
                 ];

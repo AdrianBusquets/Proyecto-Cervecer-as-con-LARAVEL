@@ -52,7 +52,7 @@
                 <p class="car-text">{{ $badges }}</p>
             @endisset
             @isset($place)
-            <p class="card-text">{{ $place }}</p>
+            <p class="card-text">{!! $place !!}</p>
             @endisset
 
             @isset($author)
