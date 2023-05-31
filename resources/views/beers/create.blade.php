@@ -43,6 +43,17 @@
                     Este campo es obligatorio
                 </div>
             </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Precio aproximado</label>
+                <input type="number" step= "0.000001" class="form-control" id="price"  name="price" value="{{ old('price') }}" aria-describedby="priceHelp" required>
+                <div id="priceHelp" class="form-text text-white">Su precio aproximado</div>
+                <div class="valid-feedback">
+                    Precio aproximado validado
+                </div>
+                <div class="invalid-feedback">
+                    Este campo es obligatorio
+                </div>
+            </div>
             <div class="mb-3 row m-2">
                 <label class="form-label">Cervecerías que la sirven sirve</label>
                 @foreach ($breweries as $brewery)

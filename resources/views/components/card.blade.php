@@ -54,6 +54,9 @@
             @isset($place)
             <p class="card-text">{!! $place !!}</p>
             @endisset
+            @isset($price)
+            <p class="card-text">{!! $price !!}</p>
+            @endisset
 
             @isset($author)
             <p class="card-text text-warning">Cervecería añadida por {{ $author }}</p>

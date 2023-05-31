@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Http;
+
 class BeerController extends Controller
 {
     /**
@@ -71,6 +73,7 @@ class BeerController extends Controller
         $beer->brand = $request->brand;
         $beer->description = $request->description;
         $beer->vol = $request->vol;
+        $beer->price= $request->price;
 
         if($request->hasFile('img')){
             $beer->img= Storage::url ($request->file('img')->store('public/beers'));
@@ -94,7 +97,17 @@ class BeerController extends Controller
     public function show(Beer $beer)
     {
         //
-        return view('beers.show', compact('beer'));
+        $endpoint= "https://www.frankfurter.app/";
+        $operation= "latest";
+        $parameters= [
+            'amount'=> $beer->price,
+            'from'=> 'EUR',
+            'to'=> 'JPY,GBP,USD,CNY'
+        ];
+        $response= Http::withoutVerifying()->get($endpoint . $operation, $parameters);
+        $responseJson= $response->json();
+        $exchange= $responseJson('rates');
+        return view('beers.show', compact('beer', 'exchange'));
     }
     public function friendly(string $name)
     {
@@ -147,6 +160,7 @@ class BeerController extends Controller
             $beer->brand= $request->brand;
         $beer->description= $request->description;
         $beer->vol= $request->vol;
+        $beer->price= $request->price;
         if ($request->hasfile('img')){
             $beer->img= Storage::url($request->file('img')->store('public/beers'));
         }
