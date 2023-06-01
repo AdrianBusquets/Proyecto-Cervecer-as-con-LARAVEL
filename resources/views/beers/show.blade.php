@@ -13,7 +13,14 @@
                 description="{!! $beer->description !!}"
                 urlBack="{{ route('beers.index') }}">
                 @isset($beer->price)
-                    <x-slot:price>Precio aproximado: {{ $beer->price }}</x-slot:price>
+                    <x-slot:price>
+                        <table class="table">
+                        <p class="text-middle">Precio aproximado:</p> <x-currency amount="{{ $beer->price }}" currency="EUR"/> <br>
+                        @foreach ($exchanges as $key => $exchange)
+                            <x-currency amount="{{ $exchange }}" currency="{{ $key }}"/><br>
+                        @endforeach
+                        </table>
+                    </x-slot:price>
                 @endisset
                 <x-slot:badges>
                     @foreach ($beer->breweries as $brewery)

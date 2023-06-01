@@ -106,8 +106,8 @@ class BeerController extends Controller
         ];
         $response= Http::withoutVerifying()->get($endpoint . $operation, $parameters);
         $responseJson= $response->json();
-        $exchange= $responseJson('rates');
-        return view('beers.show', compact('beer', 'exchange'));
+        $exchanges= $responseJson['rates'];
+        return view('beers.show', compact('beer', 'exchanges'));
     }
     public function friendly(string $name)
     {
