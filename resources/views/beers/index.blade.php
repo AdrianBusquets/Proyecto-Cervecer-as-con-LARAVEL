@@ -2,7 +2,6 @@
 @section('title', 'Listado de cervezas')
 @section('content')
 <h1 class="">Listado de cervezas</h1>
-
 <x-msgflash />
 <div class="d-flex justify-content-center my-4">
     @auth
@@ -16,7 +15,6 @@
         <div id="InfiniteScroll" class="row d-flex justify-content-between">
         @foreach ($beers as $beer)
         <x-card
-                
                 name="{!! $beer->brand !!}"
                 {{-- classCard= "{{ $classCard }}" --}}
                 description="{!! $beer->description !!}"
@@ -32,7 +30,6 @@
                         </x-slot:value> --}}
                     </x-stars>
                 </x-slot:place>
-                
                 <x-slot:urlImg>
                     @if(isset($beer->img) && ($beer->img != ''))
                     {{ $beer->img }}
@@ -87,17 +84,12 @@
         })
     }
     });
-
-    
-
     window.addEventListener ('scroll', function(){
             if($(window).scrollTop + $(window).height >= $('#' + window.contenedor).scrollTop + $('#' + window.contenedor).height){
                 window.loadData();
             }
         });
-
 </script>
-
 @endsection
 
 

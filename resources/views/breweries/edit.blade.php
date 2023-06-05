@@ -3,6 +3,7 @@
 @section('content')
 <div class="d-flex justify-content-center">
     <div class="col-sm-6">
+        <div id="fondoform" style="position: absolute; top:0px ; left: 0px; right: 0px; bottom: 0px; z-index: -1; opacity: 0.5;" class="rounded-5"></div>
         <h1>Modifica esta cervecería</h1>
         <x-msgflash />
         {{-- <form class="text-white fondocreate needs-validation" method="POST" action="{{ route('breweries.store') }}" novalidate> 
@@ -12,7 +13,7 @@
             @method('PUT')
             @csrf  
 
-            <div class="mb-3">
+            <div class="mb-3 text-center">
                 <label for="name" class="form-label">Nombre</label>
                 <input type="text" class="form-control" id="name" name="name" value="{{ $brewery->name }}" aria-describedby="nameHelp" required/>
                 <div id="nameHelp" class="form-text text-white">Dinos como se llama</div>
@@ -23,7 +24,7 @@
                     Este campo es obligatorio
                 </div>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 text-center">
                 <label for="exampleInputPlace1" class="form-label">Localidad</label>
                 <input type="text" class="form-control" id="exampleInputPlace1"  name="place" value="{{ $brewery->place }}" aria-describedby="placeHelp" required>
                 <div id="placeHelp" class="form-text text-white">Localidad en la que se situa</div>
@@ -34,7 +35,7 @@
                     Este campo es obligatorio
                 </div>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 text-center">
                 <label for="description" class="form-label">Descripción</label>
                 <textarea class="form-control" id="description" name="description" aria-describedby="descriptionHelp" required>{{ $brewery->description }}</textarea>
                 <div id="descriptionHelp" class="form-text text-white">Describenos el lugar</div><div class="valid-feedback">
@@ -44,7 +45,7 @@
                     Este campo es obligatorio
                 </div>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 text-center">
                 <label for="exampleInputLatitude1" class="form-label">Latitud</label>
                 <input type="number" step= "0.000001" class="form-control" id="exampleInputLatitude1"  name="latitude" value="{{ $brewery->latitude }}" aria-describedby="latitudeHelp" required>
                 <div id="latitudeHelp" class="form-text text-white">Su latitud</div>
@@ -55,7 +56,7 @@
                     Este campo es obligatorio
                 </div>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 text-center">
                 <label for="exampleInputlongitude1" class="form-label">Longitud</label>
                 <input type="number" step= "0.000001" class="form-control" id="exampleInputlongitude1"  name="longitude" value="{{ $brewery->longitude }}" aria-describedby="longitudeHelp" required>
                 <div id="longitudeHelp" class="form-text text-white">Su longitud</div>
@@ -67,7 +68,7 @@
                 </div>
             </div>
             <div class="mb-3 row m-2">
-                <label class="form-label">Cervezas que sirve</label>
+                <label class="form-label text-center">Cervezas que sirve</label>
                 @foreach ($beers as $beer)
                 <div class="col-sm-6 form-check form-switch">
                     <input class="form-check-input" type="checkbox" role="switch" id="beer_{{ $beer->id }}" value="{{ $beer->id }}" name="beers[]"
@@ -76,12 +77,12 @@
                 </div>
                 @endforeach
             </div>
-            <div class="mb-3">
+            <div class="mb-3 text-center">
                 <label for="img" class="form-label">Imagen</label>
                 <input type="file" class="form-control" id="img"  name="img">
                 <div id="longitudeHelp" class="form-text text-white">Sube una imagen</div>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 text-center">
                 <label for="images" class="form-label">Más imágenes</label>
                 <div class="row" id="contImages">
                     <div class="d-flex mb-2">
@@ -91,7 +92,9 @@
                 </div>
                 <div id="longitudeHelp" class="form-text text-white">Sube más imágenes</div>
             </div>
-            <button type="submit" class="btn btn-secondary">Modificar</button>
+            <div class="text-center">
+                <button type="submit" class="btn btn-secondary">Modificar</button>
+            </div>
         </form> 
     </div>
 </div>

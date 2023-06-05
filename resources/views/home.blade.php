@@ -9,9 +9,8 @@
             <div class="d-flex justify-content-around m-3">
                 <img class="rounded" src="{{  asset('img/cenosilicafobia.png') }}" width="50%">
                 @if (Auth::check())
-                <div class="row text-center">
-                <h3>Hola {{ Auth::user()->name }}</h3>
-                <h4>¿Qué estas buscando?</h4>
+                <div class="row">
+                    <h3 class="mx-auto">Hola {{ Auth::user()->name }}<br>¿Qué estas buscando?</h3>
                 </div>
                 @endif
             </div>

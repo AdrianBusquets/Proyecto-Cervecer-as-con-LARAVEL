@@ -25,8 +25,6 @@
             @endguest
         </div class="col-lg-4 col-md-6 col-sm-12">
             <div class="row d-flex justify-content-between">
-                
                 <livewire:search/>
             </div>
-
 @endsection

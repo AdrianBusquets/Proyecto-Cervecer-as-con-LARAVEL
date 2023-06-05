@@ -9,7 +9,7 @@
     
     <x-card name="Cervezamantes"
             {{-- place="{!! $brewery['poblacion'] !!}" --}}
-            urlImg="{{ asset('img/cenosilicafobia.png')  }}"
+            urlImg="{{ asset('img/cervezamantes.png')  }}"
             {{-- urlView="{{ route('brewery', $brewery['id']) }}" --}}
             {{-- urlBack="{{ route('breweries') }}" --}}
             classCard="col-sm-6 text-center">
@@ -38,11 +38,6 @@
             </x-slot:place>
             
     </x-card>
-    
-    <div id="tooltip" role="tooltip">
-        My tooltip
-        <div id="arrow" data-popper-arrow></div>
-    </div>
 {{-- <div class="cardabout card text-center" style="width: 36rem;">
     {{-- <img src="{{ asset('img/cenosilicafobia.png') }}" class="card-img-top" alt="...">
     <div class="card-body">

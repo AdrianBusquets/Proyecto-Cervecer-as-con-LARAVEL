@@ -3,7 +3,7 @@ h1 {
     padding: 25px;
     font-size: 30px;
     text-shadow: 1px 1px 0px rgb(253, 248, 242), 0 0 0.2em rgb(25, 25, 23), 0 0 0 rgb(121, 77, 32);
-    color:rgb(242, 237, 233)
+    color:rgb(242, 237, 233);
 }
 
 article{
@@ -15,10 +15,9 @@ a:hover{
     color:chocolate;
 }
 
-
 .btn:hover{
     background-color:yellow;
-    color:rgb(88, 45, 15)
+    color:rgb(88, 45, 15);
 }
 
 .fondo{
