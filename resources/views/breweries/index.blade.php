@@ -25,6 +25,7 @@
             @endguest
         </div class="col-lg-4 col-md-6 col-sm-12">
             <div class="row d-flex justify-content-between">
+                {{-- <livewire:brewerymap/> --}}
                 <livewire:search/>
             </div>
 @endsection

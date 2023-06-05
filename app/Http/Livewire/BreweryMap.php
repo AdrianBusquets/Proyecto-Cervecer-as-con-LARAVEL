@@ -1,8 +1,9 @@
-<?php
+<!-- <?php
 
 // namespace App\Http\Livewire;
 
 // use Livewire\Component;
+// use App\Http\Livewire\Search;
 
 // class BreweryMap extends Component
 // {
@@ -15,7 +16,7 @@
 //     function __construct($searchText) {
 //         $this->searchText = $searchText;
 //     }
-//     public function generateMap($breweries) {
+//     public function generateMap($breweries, $searchText) {
 //         $html = '<map id="map"></map>
 //             <script>
 //                 var map = L.map("map").setView([40.416775, -3.703790], 13);
@@ -28,11 +29,16 @@
 //                 }).addTo(map);';
 //         foreach ($breweries as $brewery) {
 //         $html .= 'L.marker([' . $brewery->latitude . ',' . $brewery->longitude . ']).addTo(map)
-//                 .bindPopup("<b>' . $brewery->name . '</b><br/>' . $brewery->address . '")';
+//                 .bindPopup("<b>' . $brewery->name . '</b>")';
 //         }
 //         $html .= '</script>';
 //         return $html;
 //     }
-//     // echo $map->generateMap($breweries);
+    // echo $map->generateMap($breweries);
 // }
 
+
+
+
+
+// ?>

@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Brewery;
 use Livewire\Component;
-use App\Http\Livewire\BreweryMap;
+// use App\Http\Livewire\BreweryMap;
 
 class Search extends Component
 {
@@ -34,7 +34,7 @@ class Search extends Component
         //         }
         //     }
         // }
-        // // uso de la función en un objeto de la clase BreweryMap
+        // uso de la función en un objeto de la clase BreweryMap
         // $breweryMap = new BreweryMap('brewery');
         // $breweryMap->generateMap($breweries, $this->searchText);
 
