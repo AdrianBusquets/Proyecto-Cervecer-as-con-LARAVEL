@@ -10,7 +10,7 @@
                 <img class="rounded" src="{{  asset('img/cenosilicafobia.png') }}" width="50%">
                 @if (Auth::check())
                 <div class="row">
-                    <h3 class="mx-auto">Hola {{ Auth::user()->name }}<br>¿Qué estas buscando?</h3>
+                    <h3 class="mx-auto d-flex justify-content-center align-items-center">Hola {{ Auth::user()->name }}<br>¿Qué estas buscando?</h3>
                 </div>
                 @endif
             </div>

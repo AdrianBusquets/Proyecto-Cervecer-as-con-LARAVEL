@@ -17,7 +17,7 @@ h3, h4{
 }
 
 article{
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     padding-bottom: 50px;
 }
 
@@ -28,6 +28,18 @@ a:hover{
     color:chocolate;
 }
 
+.enlaces_nav{
+    background-color: grey;
+    color: white;
+    border-radius: 1rem;
+    margin-right: 1em;
+    text-align: center;
+    transition: all 0.8s ease-in-out;
+}
+.enlaces_nav:hover{
+    background-color: rgb(165, 134, 42);
+    color:black;
+}
 
 .btn:hover{
     background-color:yellow;
@@ -43,7 +55,7 @@ a:hover{
 .barra{
     opacity: 0.9;
     z-index: 990;
-    height: 75px;
+    height: 95px;
 }
 
 .conlogos{
